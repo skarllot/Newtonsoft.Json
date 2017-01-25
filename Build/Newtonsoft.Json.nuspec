@@ -93,6 +93,9 @@
                 <dependency id="System.Xml.ReaderWriter" version="4.0.11" />
                 <dependency id="System.Xml.XDocument" version="4.0.11" />
             </group>
+            <group targetFramework=".NETFramework3.5-CompactFramework">
+                <dependency id="System.Runtime.WindowsCE" version="1.0.2" />
+            </group>
         </dependencies>
     </metadata>
 </package>

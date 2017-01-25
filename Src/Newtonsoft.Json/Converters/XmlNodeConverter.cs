@@ -1812,7 +1812,11 @@ namespace Newtonsoft.Json.Converters
 #if HAVE_DATE_TIME_OFFSET
                     if (reader.Value is DateTimeOffset)
                     {
+#if !NET35_CF
                         return XmlConvert.ToString((DateTimeOffset)reader.Value);
+#else
+                        return ((DateTimeOffset)reader.Value).ToString("yyyy-MM-ddTHH:mm:ss.fffffffzzz", DateTimeFormatInfo.InvariantInfo);
+#endif
                     }
 
 #endif

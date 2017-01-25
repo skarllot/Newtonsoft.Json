@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.0-*",
+  "version": "9.0.0-*",
   "title": "Json.NET",
   "description": "Json.NET is a popular high-performance JSON framework for .NET",
   "language": "en-US",
@@ -20,6 +20,8 @@
         "define": [
           "HAVE_ADO_NET",
           "HAVE_APP_DOMAIN",
+          "HAVE_APP_DOMAIN_TRUST",
+          "HAVE_ASSEMBLY_LOAD_WITH_PARTIAL_NAME",
           "HAVE_ASYNC",
           "HAVE_BIG_INTEGER",
           "HAVE_BINARY_SERIALIZATION",
@@ -49,6 +51,7 @@
           "HAVE_INOTIFY_PROPERTY_CHANGING",
           "HAVE_ISET",
           "HAVE_LINQ",
+          "HAVE_LINQ_EXPRESSION_FACTORY",
           "HAVE_MEMORY_BARRIER",
           "HAVE_METHOD_IMPL_ATTRIBUTE",
           "HAVE_NON_SERIALIZED_ATTRIBUTE",
@@ -56,8 +59,10 @@
           "HAVE_REFLECTION_EMIT",
           "HAVE_SECURITY_SAFE_CRITICAL_ATTRIBUTE",
           "HAVE_SERIALIZABLE_EXCEPTION",
+          "HAVE_SERIALIZATION_BINDER",
           "HAVE_SERIALIZATION_BINDER_BIND_TO_NAME",
           "HAVE_SERIALIZATION_FORMATTERS",
+          "HAVE_SERIALIZATION_FORMATTERCONVERTER",
           "HAVE_STREAM_READER_WRITER_CLOSE",
           "HAVE_STRING_JOIN_WITH_ENUMERABLE",
           "HAVE_TIME_SPAN_PARSE_WITH_CULTURE",
@@ -66,6 +71,7 @@
           "HAVE_TPL",
           "HAVE_TRACE_WRITER",
           "HAVE_UNICODE_SURROGATE_DETECTION",
+          "HAVE_VALUE_TRYPARSE",
           "HAVE_VARIANT_TYPE_PARAMETERS",
           "HAVE_VERSION_TRY_PARSE",
           "HAVE_XLINQ",
@@ -86,6 +92,8 @@
           "NET40",
           "HAVE_ADO_NET",
           "HAVE_APP_DOMAIN",
+          "HAVE_APP_DOMAIN_TRUST",
+          "HAVE_ASSEMBLY_LOAD_WITH_PARTIAL_NAME",
           "HAVE_BIG_INTEGER",
           "HAVE_BINARY_SERIALIZATION",
           "HAVE_CAS",
@@ -113,13 +121,16 @@
           "HAVE_INOTIFY_PROPERTY_CHANGING",
           "HAVE_ISET",
           "HAVE_LINQ",
+          "HAVE_LINQ_EXPRESSION_FACTORY",
           "HAVE_MEMORY_BARRIER",
           "HAVE_NON_SERIALIZED_ATTRIBUTE",
           "HAVE_REFLECTION_EMIT",
           "HAVE_SECURITY_SAFE_CRITICAL_ATTRIBUTE",
           "HAVE_SERIALIZABLE_EXCEPTION",
+          "HAVE_SERIALIZATION_BINDER",
           "HAVE_SERIALIZATION_BINDER_BIND_TO_NAME",
           "HAVE_SERIALIZATION_FORMATTERS",
+          "HAVE_SERIALIZATION_FORMATTERCONVERTER",
           "HAVE_STREAM_READER_WRITER_CLOSE",
           "HAVE_STRING_JOIN_WITH_ENUMERABLE",
           "HAVE_TIME_SPAN_PARSE_WITH_CULTURE",
@@ -128,6 +139,7 @@
           "HAVE_TPL",
           "HAVE_TRACE_WRITER",
           "HAVE_UNICODE_SURROGATE_DETECTION",
+          "HAVE_VALUE_TRYPARSE",
           "HAVE_VARIANT_TYPE_PARAMETERS",
           "HAVE_VERSION_TRY_PARSE",
           "HAVE_XLINQ",
@@ -142,12 +154,13 @@
         "System.Xml.Linq": ""
       }
     },
-    "net35": {
+    "net35-client": {
       "buildOptions": {
         "define": [
           "NET35",
           "HAVE_ADO_NET",
           "HAVE_APP_DOMAIN",
+          "HAVE_ASSEMBLY_LOAD_WITH_PARTIAL_NAME",
           "HAVE_BINARY_SERIALIZATION",
           "HAVE_CAS",
           "HAVE_CHAR_TO_STRING_WITH_CULTURE",
@@ -169,16 +182,54 @@
           "HAVE_NON_SERIALIZED_ATTRIBUTE",
           "HAVE_REFLECTION_EMIT",
           "HAVE_SERIALIZABLE_EXCEPTION",
+          "HAVE_SERIALIZATION_BINDER",
           "HAVE_SERIALIZATION_FORMATTERS",
+          "HAVE_SERIALIZATION_FORMATTERCONVERTER",
           "HAVE_STREAM_READER_WRITER_CLOSE",
           "HAVE_TIME_ZONE_INFO",
           "HAVE_TRACE_WRITER",
           "HAVE_UNICODE_SURROGATE_DETECTION",
+          "HAVE_VALUE_TRYPARSE",
           "HAVE_XLINQ",
           "HAVE_XML_DOCUMENT"
         ]
       },
       "frameworkAssemblies": {
+        "System.Core": "",
+        "System.Data": "",
+        "System.Runtime.Serialization": "",
+        "System.Xml": "",
+        "System.Xml.Linq": ""
+      }
+    },
+    "net35-cf": {
+      "buildOptions": {
+        "define": [
+          "WindowsCE",
+          "HAVE_ADO_NET",
+          "HAVE_BINARY_SERIALIZATION",
+          "HAVE_CHAR_TO_STRING_WITH_CULTURE",
+          "HAVE_CHAR_TO_LOWER_WITH_CULTURE",
+          "HAVE_COM_ATTRIBUTES",
+          "HAVE_DATA_CONTRACTS",
+          "HAVE_DATE_TIME_OFFSET",
+          "HAVE_DB_NULL_TYPE_CODE",
+          "HAVE_FULL_REFLECTION",
+          "HAVE_ICLONEABLE",
+          "HAVE_ICONVERTIBLE",
+          "HAVE_LINQ",
+          "HAVE_MEMORY_BARRIER",
+          "HAVE_NON_SERIALIZED_ATTRIBUTE",
+          "HAVE_STREAM_READER_WRITER_CLOSE",
+          "HAVE_XLINQ"
+        ]
+      },
+      "dependencies": {
+        "System.Runtime.WindowsCE": "1.0.2"
+      },
+      "frameworkAssemblies": {
+        "mscorlib": "",
+        "System": "",
         "System.Core": "",
         "System.Data": "",
         "System.Runtime.Serialization": "",
@@ -192,6 +243,7 @@
           "NET20",
           "HAVE_ADO_NET",
           "HAVE_APP_DOMAIN",
+          "HAVE_ASSEMBLY_LOAD_WITH_PARTIAL_NAME",
           "HAVE_BINARY_SERIALIZATION",
           "HAVE_CAS",
           "HAVE_CHAR_TO_LOWER_WITH_CULTURE",
@@ -207,10 +259,13 @@
           "HAVE_NON_SERIALIZED_ATTRIBUTE",
           "HAVE_REFLECTION_EMIT",
           "HAVE_SERIALIZABLE_EXCEPTION",
+          "HAVE_SERIALIZATION_BINDER",
           "HAVE_SERIALIZATION_FORMATTERS",
+          "HAVE_SERIALIZATION_FORMATTERCONVERTER",
           "HAVE_STREAM_READER_WRITER_CLOSE",
           "HAVE_TRACE_WRITER",
           "HAVE_UNICODE_SURROGATE_DETECTION",
+          "HAVE_VALUE_TRYPARSE",
           "HAVE_XML_DOCUMENT"
         ]
       },
@@ -235,6 +290,7 @@
           "HAVE_IMMUTABLE_COLLECTIONS",
           "HAVE_ISET",
           "HAVE_LINQ",
+          "HAVE_LINQ_EXPRESSION_FACTORY",
           "HAVE_METHOD_IMPL_ATTRIBUTE",
           "HAVE_READ_ONLY_COLLECTIONS",
           "HAVE_REFLECTION_BINDER",
@@ -244,6 +300,7 @@
           "HAVE_TIME_SPAN_TO_STRING_WITH_CULTURE",
           "HAVE_TIME_ZONE_INFO",
           "HAVE_TPL",
+          "HAVE_VALUE_TRYPARSE",
           "HAVE_VARIANT_TYPE_PARAMETERS",
           "HAVE_VERSION_TRY_PARSE",
           "HAVE_XLINQ",
@@ -296,6 +353,7 @@
           "HAVE_IMMUTABLE_COLLECTIONS",
           "HAVE_ISET",
           "HAVE_LINQ",
+          "HAVE_LINQ_EXPRESSION_FACTORY",
           "HAVE_MEMORY_BARRIER",
           "HAVE_SECURITY_SAFE_CRITICAL_ATTRIBUTE",
           "HAVE_SERIALIZATION_BINDER_BIND_TO_NAME",
@@ -303,9 +361,10 @@
           "HAVE_TIME_SPAN_PARSE_WITH_CULTURE",
           "HAVE_TIME_SPAN_TO_STRING_WITH_CULTURE",
           "HAVE_TIME_ZONE_INFO",
+          "HAVE_VALUE_TRYPARSE",
           "HAVE_VARIANT_TYPE_PARAMETERS",
           "HAVE_VERSION_TRY_PARSE"
-        ]      
+        ]
       },
       "frameworkAssemblies": {
         "mscorlib": "",
@@ -334,6 +393,7 @@
           "HAVE_INOTIFY_COLLECTION_CHANGED",
           "HAVE_ISET",
           "HAVE_LINQ",
+          "HAVE_LINQ_EXPRESSION_FACTORY",
           "HAVE_METHOD_IMPL_ATTRIBUTE",
           "HAVE_READ_ONLY_COLLECTIONS",
           "HAVE_REFLECTION_BINDER",
@@ -344,6 +404,7 @@
           "HAVE_TIME_ZONE_INFO",
           "HAVE_TPL",
           "HAVE_UNICODE_SURROGATE_DETECTION",
+          "HAVE_VALUE_TRYPARSE",
           "HAVE_VARIANT_TYPE_PARAMETERS",
           "HAVE_VERSION_TRY_PARSE",
           "HAVE_XLINQ"
@@ -394,6 +455,7 @@
           "HAVE_INOTIFY_COLLECTION_CHANGED",
           "HAVE_ISET",
           "HAVE_LINQ",
+          "HAVE_LINQ_EXPRESSION_FACTORY",
           "HAVE_METHOD_IMPL_ATTRIBUTE",
           "HAVE_READ_ONLY_COLLECTIONS",
           "HAVE_REFLECTION_BINDER",
@@ -405,6 +467,7 @@
           "HAVE_TIME_ZONE_INFO",
           "HAVE_TPL",
           "HAVE_UNICODE_SURROGATE_DETECTION",
+          "HAVE_VALUE_TRYPARSE",
           "HAVE_VARIANT_TYPE_PARAMETERS",
           "HAVE_VERSION_TRY_PARSE",
           "HAVE_XLINQ"
@@ -461,6 +524,7 @@
           "HAVE_INOTIFY_PROPERTY_CHANGING",
           "HAVE_ISET",
           "HAVE_LINQ",
+          "HAVE_LINQ_EXPRESSION_FACTORY",
           "HAVE_METHOD_IMPL_ATTRIBUTE",
           "HAVE_NON_SERIALIZED_ATTRIBUTE",
           "HAVE_READ_ONLY_COLLECTIONS",
@@ -473,6 +537,7 @@
           "HAVE_TIME_ZONE_INFO",
           "HAVE_TPL",
           "HAVE_UNICODE_SURROGATE_DETECTION",
+          "HAVE_VALUE_TRYPARSE",
           "HAVE_VARIANT_TYPE_PARAMETERS",
           "HAVE_VERSION_TRY_PARSE",
           "HAVE_XLINQ"

@@ -433,13 +433,11 @@ namespace Newtonsoft.Json.Serialization
             {
                 if (_fullyTrusted == null)
                 {
-#if (DOTNET || PORTABLE || PORTABLE40)
-                    _fullyTrusted = false;
-#elif !(NET20 || NET35 || PORTABLE40)
+#if HAVE_APP_DOMAIN_TRUST
                     AppDomain appDomain = AppDomain.CurrentDomain;
 
                     _fullyTrusted = appDomain.IsHomogenous && appDomain.IsFullyTrusted;
-#else
+#elif HAVE_CAS
                     try
                     {
                         new SecurityPermission(PermissionState.Unrestricted).Demand();
@@ -449,6 +447,8 @@ namespace Newtonsoft.Json.Serialization
                     {
                         _fullyTrusted = false;
                     }
+#else
+                    _fullyTrusted = false;
 #endif
                 }
 
@@ -460,15 +460,17 @@ namespace Newtonsoft.Json.Serialization
         {
             get
             {
-#if !(PORTABLE40 || PORTABLE || DOTNET)
+#if HAVE_REFLECTION_EMIT
                 if (DynamicCodeGeneration)
                 {
                     return DynamicReflectionDelegateFactory.Instance;
                 }
 
                 return LateBoundReflectionDelegateFactory.Instance;
-#else
+#elif HAVE_LINQ_EXPRESSION_FACTORY
                 return ExpressionReflectionDelegateFactory.Instance;
+#else
+                return LateBoundReflectionDelegateFactory.Instance;
 #endif
             }
         }

@@ -32,6 +32,14 @@ using System.Numerics;
 #endif
 using Newtonsoft.Json.Utilities;
 
+#if !HAVE_VALUE_TRYPARSE
+using DecimalStatic = System.Decimal2;
+using DoubleStatic = System.Double2;
+#else
+using DecimalStatic = System.Decimal;
+using DoubleStatic = System.Double;
+#endif
+
 namespace Newtonsoft.Json
 {
     internal enum ReadType
@@ -1907,7 +1915,7 @@ namespace Newtonsoft.Json
                 else
                 {
                     double value;
-                    if (!double.TryParse(number, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
+                    if (!DoubleStatic.TryParse(number, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
                     {
                         throw ThrowReaderError("Input string '{0}' is not a valid number.".FormatWith(CultureInfo.InvariantCulture, _stringReference.ToString()));
                     }
@@ -1986,7 +1994,7 @@ namespace Newtonsoft.Json
                     string number = _stringReference.ToString();
 
                     decimal value;
-                    if (decimal.TryParse(number, NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture, out value))
+                    if (DecimalStatic.TryParse(number, NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture, out value))
                     {
                         numberValue = value;
                     }
@@ -2092,7 +2100,7 @@ namespace Newtonsoft.Json
                         if (_floatParseHandling == FloatParseHandling.Decimal)
                         {
                             decimal d;
-                            if (decimal.TryParse(number, NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture, out d))
+                            if (DecimalStatic.TryParse(number, NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture, out d))
                             {
                                 numberValue = d;
                             }

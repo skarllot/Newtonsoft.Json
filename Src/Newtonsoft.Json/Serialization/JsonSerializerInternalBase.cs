@@ -29,6 +29,12 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json.Utilities;
 
+#if NET35_CF
+using RuntimeHelpersStatic = System.Runtime.CompilerServices.RuntimeHelpers2;
+#else
+using RuntimeHelpersStatic = System.Runtime.CompilerServices.RuntimeHelpers;
+#endif
+
 namespace Newtonsoft.Json.Serialization
 {
     internal abstract class JsonSerializerInternalBase
@@ -43,7 +49,7 @@ namespace Newtonsoft.Json.Serialization
             int IEqualityComparer<object>.GetHashCode(object obj)
             {
                 // put objects in a bucket based on their reference
-                return RuntimeHelpers.GetHashCode(obj);
+                return RuntimeHelpersStatic.GetHashCode(obj);
             }
         }
 

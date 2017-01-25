@@ -1371,7 +1371,7 @@ namespace Newtonsoft.Json.Serialization
             {
                 valueProvider = new ReflectionValueProvider(member);
             }
-#elif !(PORTABLE40)
+#elif HAVE_LINQ_EXPRESSION_FACTORY
             valueProvider = new ExpressionValueProvider(member);
 #else
             valueProvider = new ReflectionValueProvider(member);

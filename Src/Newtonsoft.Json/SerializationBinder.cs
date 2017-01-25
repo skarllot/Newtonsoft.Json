@@ -1,5 +1,5 @@
 ﻿
-#if (DOTNET || PORTABLE40 || PORTABLE)
+#if !HAVE_SERIALIZATION_BINDER
 using System;
 using System.Reflection;
 

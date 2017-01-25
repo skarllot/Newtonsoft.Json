@@ -35,6 +35,12 @@ using System.Globalization;
 using Newtonsoft.Json.Utilities;
 using Newtonsoft.Json.Linq;
 
+#if !HAVE_VALUE_TRYPARSE
+using Int32Static = System.Int322;
+#else
+using Int32Static = System.Int32;
+#endif
+
 namespace Newtonsoft.Json.Schema
 {
     [Obsolete("JSON Schema validation has been moved to its own package. See http://www.newtonsoft.com/jsonschema for more details.")]
@@ -124,7 +130,7 @@ namespace Newtonsoft.Json.Schema
                             else if (currentToken.Type == JTokenType.Array || currentToken.Type == JTokenType.Constructor)
                             {
                                 int index;
-                                if (int.TryParse(part, out index) && index >= 0 && index < currentToken.Count())
+                                if (Int32Static.TryParse(part, out index) && index >= 0 && index < currentToken.Count())
                                 {
                                     currentToken = currentToken[index];
                                 }

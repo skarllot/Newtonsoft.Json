@@ -193,7 +193,7 @@ namespace Newtonsoft.Json.Schema
                 return containerAttribute.Description;
             }
 
-#if HAVE_ADO_NET
+#if HAVE_COMPONENT_MODEL
             DescriptionAttribute descriptionAttribute = ReflectionUtils.GetAttribute<DescriptionAttribute>(type);
             return descriptionAttribute?.Description;
 #else

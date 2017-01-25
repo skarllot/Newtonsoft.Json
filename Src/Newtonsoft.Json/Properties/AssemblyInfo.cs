@@ -32,7 +32,7 @@ using System.Security;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-#if NETSTANDARD1_0 
+#if NETSTANDARD1_0
 [assembly: AssemblyTitle("Json.NET .NET Standard 1.0")]
 #elif NETSTANDARD1_3
 [assembly: AssemblyTitle("Json.NET .NET Standard 1.3")]
@@ -53,6 +53,8 @@ using System.Security;
 #elif NET40
 [assembly: AssemblyTitle("Json.NET .NET 4.0")]
 [assembly: AllowPartiallyTrustedCallers]
+#elif WindowsCE
+[assembly: AssemblyTitle("Json.NET .NET Compact 3.5")]
 #else
 [assembly: AssemblyTitle("Json.NET")]
 [assembly: AllowPartiallyTrustedCallers]
@@ -98,6 +100,6 @@ using System.Security;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("7.0.0.0")]
-[assembly: AssemblyFileVersion("7.0.2.18802")]
+[assembly: AssemblyVersion("9.0.0.0")]
 [assembly: CLSCompliant(true)]
+[assembly: AssemblyFileVersion("9.0.2.7010")]

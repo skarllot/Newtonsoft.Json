@@ -42,6 +42,12 @@ using System.Data.SqlTypes;
 
 #endif
 
+#if NET35_CF
+using BitConverterStatic = System.BitConverter2;
+#else
+using BitConverterStatic = System.BitConverter;
+#endif
+
 namespace Newtonsoft.Json.Utilities
 {
     internal enum PrimitiveTypeCode
@@ -397,7 +403,7 @@ namespace Newtonsoft.Json.Utilities
         }
 #endif
 
-        #region TryConvert
+#region TryConvert
         internal enum ConvertResult
         {
             Success = 0,
@@ -610,9 +616,9 @@ namespace Newtonsoft.Json.Utilities
             value = null;
             return ConvertResult.NoValidConversion;
         }
-        #endregion
+#endregion
 
-        #region ConvertOrCast
+#region ConvertOrCast
         /// <summary>
         /// Converts the value to the specified type. If the value is unable to be converted, the
         /// value is checked whether it assignable to the specified type.
@@ -645,7 +651,7 @@ namespace Newtonsoft.Json.Utilities
 
             return EnsureTypeAssignable(initialValue, ReflectionUtils.GetObjectType(initialValue), targetType);
         }
-        #endregion
+#endregion
 
         private static object EnsureTypeAssignable(object value, Type initialType, Type targetType)
         {
@@ -1168,7 +1174,7 @@ namespace Newtonsoft.Json.Utilities
                     val |= 0x8000000000000000;
                 }
 
-                return BitConverter.Int64BitsToDouble((long)val);
+                return BitConverterStatic.Int64BitsToDouble((long)val);
             }
 
             private static ulong Mul64Lossy(ulong a, ulong b, ref int exp)

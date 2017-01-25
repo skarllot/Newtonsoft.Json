@@ -29,6 +29,14 @@ using System.Globalization;
 using System.Text;
 using Newtonsoft.Json.Utilities;
 
+#if !HAVE_VALUE_TRYPARSE
+using DoubleStatic = System.Double2;
+using Int64Static = System.Int642;
+#else
+using DoubleStatic = System.Double;
+using Int64Static = System.Int64;
+#endif
+
 namespace Newtonsoft.Json.Linq.JsonPath
 {
     internal class JPath
@@ -596,14 +604,14 @@ namespace Newtonsoft.Json.Linq.JsonPath
                         if (numberText.IndexOfAny(new char[] { '.', 'E', 'e' }) != -1)
                         {
                             double d;
-                            bool result = double.TryParse(numberText, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out d);
+                            bool result = DoubleStatic.TryParse(numberText, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out d);
                             value = d;
                             return result;
                         }
                         else
                         {
                             long l;
-                            bool result = long.TryParse(numberText, NumberStyles.Integer, CultureInfo.InvariantCulture, out l);
+                            bool result = Int64Static.TryParse(numberText, NumberStyles.Integer, CultureInfo.InvariantCulture, out l);
                             value = l;
                             return result;
                         }

@@ -28,6 +28,12 @@ using System.IO;
 using System.Xml;
 using System.Globalization;
 
+#if !HAVE_VALUE_TRYPARSE
+using DateTimeStatic = System.DateTime2;
+#else
+using DateTimeStatic = System.DateTime;
+#endif
+
 namespace Newtonsoft.Json.Utilities
 {
     internal static class DateTimeUtils
@@ -302,7 +308,11 @@ namespace Newtonsoft.Json.Utilities
                     offset = new TimeSpan(dateTimeParser.ZoneHour, dateTimeParser.ZoneMinute, 0);
                     break;
                 default:
+#if HAVE_TIME_ZONE_INFO
                     offset = TimeZoneInfo.Local.GetUtcOffset(d);
+#else
+                    offset = TimeZone.CurrentTimeZone.GetUtcOffset(d);
+#endif
                     break;
             }
 
@@ -393,7 +403,7 @@ namespace Newtonsoft.Json.Utilities
                 }
                 else if (s.Length >= 19 && s.Length <= 40 && char.IsDigit(s[0]) && s[10] == 'T')
                 {
-                    if (DateTime.TryParseExact(s, IsoDateFormat, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out dt))
+                    if (DateTimeStatic.TryParseExact(s, IsoDateFormat, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out dt))
                     {
                         dt = EnsureDateTime(dt, dateTimeZoneHandling);
                         return true;
@@ -553,7 +563,7 @@ namespace Newtonsoft.Json.Utilities
         private static bool TryParseDateTimeExact(string text, DateTimeZoneHandling dateTimeZoneHandling, string dateFormatString, CultureInfo culture, out DateTime dt)
         {
             DateTime temp;
-            if (DateTime.TryParseExact(text, dateFormatString, culture, DateTimeStyles.RoundtripKind, out temp))
+            if (DateTimeStatic.TryParseExact(text, dateFormatString, culture, DateTimeStyles.RoundtripKind, out temp))
             {
                 temp = EnsureDateTime(temp, dateTimeZoneHandling);
                 dt = temp;
