@@ -414,7 +414,7 @@ namespace Newtonsoft.Json
                     case State.PostValue:
                         // returns true if it hits
                         // end of object or array
-                        if (ParsePostValue())
+                        if (ParsePostValue(false))
                         {
                             return true;
                         }
@@ -482,13 +482,18 @@ namespace Newtonsoft.Json
 
             switch (_currentState)
             {
+                case State.PostValue:
+                    if (ParsePostValue(true))
+                    {
+                        return null;
+                    }
+                    goto case State.Start;
                 case State.Start:
                 case State.Property:
                 case State.Array:
                 case State.ArrayStart:
                 case State.Constructor:
                 case State.ConstructorStart:
-                case State.PostValue:
                     while (true)
                     {
                         char currentChar = _chars[_charPos];
@@ -580,13 +585,18 @@ namespace Newtonsoft.Json
 
             switch (_currentState)
             {
+                case State.PostValue:
+                    if (ParsePostValue(true))
+                    {
+                        return null;
+                    }
+                    goto case State.Start;
                 case State.Start:
                 case State.Property:
                 case State.Array:
                 case State.ArrayStart:
                 case State.Constructor:
                 case State.ConstructorStart:
-                case State.PostValue:
                     while (true)
                     {
                         char currentChar = _chars[_charPos];
@@ -741,13 +751,18 @@ namespace Newtonsoft.Json
 
             switch (_currentState)
             {
+                case State.PostValue:
+                    if (ParsePostValue(true))
+                    {
+                        return null;
+                    }
+                    goto case State.Start;
                 case State.Start:
                 case State.Property:
                 case State.Array:
                 case State.ArrayStart:
                 case State.Constructor:
                 case State.ConstructorStart:
-                case State.PostValue:
                     while (true)
                     {
                         char currentChar = _chars[_charPos];
@@ -857,7 +872,11 @@ namespace Newtonsoft.Json
             if (_currentState != State.PostValue)
             {
                 SetToken(JsonToken.Undefined);
-                throw CreateUnexpectedCharacterException(',');
+                JsonReaderException ex = CreateUnexpectedCharacterException(',');
+                // so the comma will be parsed again
+                _charPos--;
+
+                throw ex;
             }
 
             SetStateBasedOnCurrent();
@@ -869,13 +888,18 @@ namespace Newtonsoft.Json
 
             switch (_currentState)
             {
+                case State.PostValue:
+                    if (ParsePostValue(true))
+                    {
+                        return null;
+                    }
+                    goto case State.Start;
                 case State.Start:
                 case State.Property:
                 case State.Array:
                 case State.ArrayStart:
                 case State.Constructor:
                 case State.ConstructorStart:
-                case State.PostValue:
                     while (true)
                     {
                         char currentChar = _chars[_charPos];
@@ -1269,13 +1293,21 @@ namespace Newtonsoft.Json
         {
             if (enoughChars)
             {
-                char hexChar = Convert.ToChar(ConvertUtils.HexTextToInt(_chars, _charPos, _charPos + 4));
-                _charPos += 4;
-                return hexChar;
+                int value;
+                if (ConvertUtils.TryHexTextToInt(_chars, _charPos, _charPos + 4, out value))
+                {
+                    char hexChar = Convert.ToChar(value);
+                    _charPos += 4;
+                    return hexChar;
+                }
+                else
+                {
+                    throw JsonReaderException.Create(this, @"Invalid Unicode escape sequence: \u{0}.".FormatWith(CultureInfo.InvariantCulture, new string(_chars, _charPos, 4)));
+                }
             }
             else
             {
-                throw JsonReaderException.Create(this, "Unexpected end while parsing Unicode character.");
+                throw JsonReaderException.Create(this, "Unexpected end while parsing Unicode escape sequence.");
             }
         }
 
@@ -1368,7 +1400,7 @@ namespace Newtonsoft.Json
             _stringReference = new StringReference();
         }
 
-        private bool ParsePostValue()
+        private bool ParsePostValue(bool ignoreComments)
         {
             while (true)
             {
@@ -1403,8 +1435,12 @@ namespace Newtonsoft.Json
                         SetToken(JsonToken.EndConstructor);
                         return true;
                     case '/':
-                        ParseComment(true);
-                        return true;
+                        ParseComment(!ignoreComments);
+                        if (!ignoreComments)
+                        {
+                            return true;
+                        }
+                        break;
                     case ',':
                         _charPos++;
 
