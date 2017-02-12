@@ -220,6 +220,7 @@
           "HAVE_LINQ",
           "HAVE_MEMORY_BARRIER",
           "HAVE_NON_SERIALIZED_ATTRIBUTE",
+          "HAVE_SERIALIZATION_BINDER_BIND_TO_NAME",
           "HAVE_STREAM_READER_WRITER_CLOSE",
           "HAVE_XLINQ"
         ]
