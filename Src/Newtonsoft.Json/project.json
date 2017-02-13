@@ -14,6 +14,14 @@
       "url": "git://github.com/JamesNK/Newtonsoft.Json"
     }
   },
+
+  "buildOptions": {
+    "keyFile": "../tools/keypair.snk",
+    "outputName": "Newtonsoft.Json.Extended",
+    "xmlDoc": true,
+    "warningsAsErrors": true
+  },
+  
   "frameworks": {
     "net45": {
       "buildOptions": {

@@ -14,7 +14,7 @@ namespace System.Runtime.Serialization.Formatters
         Simple = 0,
 
         /// <summary>
-        /// In full mode, the assembly used during deserialization must match exactly the assembly used during serialization. The <see cref="System.Reflection.Assembly.Load"/> is used to load the assembly.
+        /// In full mode, the assembly used during deserialization must match exactly the assembly used during serialization. The <see cref="M:Reflection.Assembly.Load"/> is used to load the assembly.
         /// </summary>
         Full = 1
     }
