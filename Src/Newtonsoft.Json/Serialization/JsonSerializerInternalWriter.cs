@@ -845,8 +845,7 @@ namespace Newtonsoft.Json.Serialization
 #endif
         private void SerializeISerializable(JsonWriter writer, ISerializable value, JsonISerializableContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
         {
-// TODO: HAVE_APPDOMAIN_TRUSTING?
-#if !NETSTANDARD1_3
+#if HAVE_APPDOMAIN_TRUSTING
             if (!JsonTypeReflector.FullyTrusted)
             {
                 string message = @"Type '{0}' implements ISerializable but cannot be serialized using the ISerializable interface because the current application is not fully trusted and ISerializable can expose secure data." + Environment.NewLine +
@@ -1132,45 +1131,45 @@ namespace Newtonsoft.Json.Serialization
                 {
                     case PrimitiveTypeCode.DateTime:
                     case PrimitiveTypeCode.DateTimeNullable:
-                    {
-                        DateTime dt = DateTimeUtils.EnsureDateTime((DateTime)name, writer.DateTimeZoneHandling);
+                        {
+                            DateTime dt = DateTimeUtils.EnsureDateTime((DateTime)name, writer.DateTimeZoneHandling);
 
-                        escape = false;
-                        StringWriter sw = new StringWriter(CultureInfo.InvariantCulture);
-                        DateTimeUtils.WriteDateTimeString(sw, dt, writer.DateFormatHandling, writer.DateFormatString, writer.Culture);
-                        return sw.ToString();
-                    }
+                            escape = false;
+                            StringWriter sw = new StringWriter(CultureInfo.InvariantCulture);
+                            DateTimeUtils.WriteDateTimeString(sw, dt, writer.DateFormatHandling, writer.DateFormatString, writer.Culture);
+                            return sw.ToString();
+                        }
 #if HAVE_DATE_TIME_OFFSET
                     case PrimitiveTypeCode.DateTimeOffset:
-					case PrimitiveTypeCode.DateTimeOffsetNullable:
-                    {
-                        escape = false;
-                        StringWriter sw = new StringWriter(CultureInfo.InvariantCulture);
-                        DateTimeUtils.WriteDateTimeOffsetString(sw, (DateTimeOffset)name, writer.DateFormatHandling, writer.DateFormatString, writer.Culture);
-                        return sw.ToString();
-                    }
+                    case PrimitiveTypeCode.DateTimeOffsetNullable:
+                        {
+                            escape = false;
+                            StringWriter sw = new StringWriter(CultureInfo.InvariantCulture);
+                            DateTimeUtils.WriteDateTimeOffsetString(sw, (DateTimeOffset)name, writer.DateFormatHandling, writer.DateFormatString, writer.Culture);
+                            return sw.ToString();
+                        }
 #endif
                     case PrimitiveTypeCode.Double:
                     case PrimitiveTypeCode.DoubleNullable:
-                    {
-                        double d = (double)name;
+                        {
+                            double d = (double)name;
 
-                        escape = false;
-                        return d.ToString("R", CultureInfo.InvariantCulture);
-                    }
+                            escape = false;
+                            return d.ToString("R", CultureInfo.InvariantCulture);
+                        }
                     case PrimitiveTypeCode.Single:
                     case PrimitiveTypeCode.SingleNullable:
-                    {
-                        float f = (float)name;
+                        {
+                            float f = (float)name;
 
-                        escape = false;
-                        return f.ToString("R", CultureInfo.InvariantCulture);
-                    }
+                            escape = false;
+                            return f.ToString("R", CultureInfo.InvariantCulture);
+                        }
                     default:
-                    {
-                        escape = true;
-                        return Convert.ToString(name, CultureInfo.InvariantCulture);
-                    }
+                        {
+                            escape = true;
+                            return Convert.ToString(name, CultureInfo.InvariantCulture);
+                        }
                 }
             }
             else if (TryConvertToString(name, name.GetType(), out propertyName))
