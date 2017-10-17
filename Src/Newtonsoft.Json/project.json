@@ -229,12 +229,13 @@
           "HAVE_MEMORY_BARRIER",
           "HAVE_NON_SERIALIZED_ATTRIBUTE",
           "HAVE_SERIALIZATION_BINDER_BIND_TO_NAME",
+          "HAVE_SERIALIZATION_FORMATTERCONVERTER",
           "HAVE_STREAM_READER_WRITER_CLOSE",
           "HAVE_XLINQ"
         ]
       },
       "dependencies": {
-        "System.Runtime.WindowsCE": "1.0.2"
+        "NETStandard.WindowsCE": "1.0.0-alpha009"
       },
       "frameworkAssemblies": {
         "mscorlib": "",

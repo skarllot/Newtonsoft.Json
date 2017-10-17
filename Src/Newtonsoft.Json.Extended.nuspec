@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
-        <id>Newtonsoft.Json.Extended</id>
+        <id>Newtonsoft.Json.Extended.Nightly</id>
         <version>$version$</version>
         <title>Json.NET Extended</title>
         <description>Json.NET is a popular high-performance JSON framework for .NET, this version was extended to cover more platforms</description>
