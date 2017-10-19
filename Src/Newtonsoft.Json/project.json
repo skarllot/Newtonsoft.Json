@@ -232,7 +232,8 @@
           "HAVE_SERIALIZATION_FORMATTERCONVERTER",
           "HAVE_STREAM_READER_WRITER_CLOSE",
           "HAVE_XLINQ"
-        ]
+        ],
+        "optimize": false
       },
       "dependencies": {
         "NETStandard.WindowsCE": "1.0.0-alpha009"

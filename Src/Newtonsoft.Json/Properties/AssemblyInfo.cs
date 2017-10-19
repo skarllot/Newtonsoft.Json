@@ -97,4 +97,4 @@ using System.Security;
 [assembly: AssemblyVersion("9.0.0.0")]
 [assembly: CLSCompliant(true)]
 [assembly: AssemblyFileVersion("9.0.2.7010")]
-[assembly: AssemblyInformationalVersion("2017.10.18")]
+[assembly: AssemblyInformationalVersion("2017.10.19")]
